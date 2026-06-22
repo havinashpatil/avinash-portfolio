@@ -1414,7 +1414,7 @@
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing" target="_blank" class="btn-resume">Resume <i class="fa-solid fa-cloud-arrow-down" style="margin-left: 5px;"></i></a>
+      <a href="https://drive.google.com/file/d/1TiGNvnU-aXqp17dIP5oUyLMJLCPtvGUj/view?usp=sharing" target="_blank" class="btn-resume">Resume <i class="fa-solid fa-cloud-arrow-down" style="margin-left: 5px;"></i></a>
     </nav>
     <div class="menu-toggle" onclick="toggleMobileMenu()">
       <i class="fa-solid fa-bars"></i>
@@ -1825,6 +1825,7 @@
           Other certifications include: Kaggle ML, Infosys Virtual Internship, Android using Kotlin (Infosys), MATLAB Onramp, and Python Essentials.
         </p>
         <a href="https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing" target="_blank" class="btn-secondary">View All Certifications Folder <i class="fa-solid fa-folder-open" style="margin-left: 5px;"></i></a>
+        <a href="https://drive.google.com/file/d/1TiGNvnU-aXqp17dIP5oUyLMJLCPtvGUj/view?usp=sharing" target="_blank" class="btn-primary" style="margin-left: 15px;">Download Resume <i class="fa-solid fa-file-pdf" style="margin-left: 5px;"></i></a>
       </div>
     </section>
 
@@ -2232,14 +2233,40 @@
         response: "Avinash Patil is an AI/ML Engineering student at BITM Ballari (2023–2027), currently in his 6th semester with a 7.74/10 GPA. He specializes in Deep Learning, NLP pipelines, and Quantum ML."
       },
       projects: {
-        keywords: ['projects', 'builds', 'codebase', 'develop', 'portfolio projects'],
-        response: "Avinash's projects include:<br/>" +
-                  "1. <strong>Aladdin-Shield</strong>: ESG NLP greenwashing detector & DCC-GARCH risk auditor.<br/>" +
-                  "2. <strong>Blood Sense AI</strong>: Hybrid MobileNetV2 + VQC quantum model for Leukemia cell detection (96%+ recall).<br/>" +
-                  "3. <strong>CodeArena RL</strong>: OpenEnv RL environment for code repair using GRPO.<br/>" +
-                  "4. <strong>WellBot</strong>: Multi-layer LLM fallback wellness assistant.<br/>" +
-                  "5. <strong>CAFA 6 Protein Predictor</strong>: CNN + GRU hybrid model.<br/>" +
-                  "6. <strong>Echo Check</strong>: Event-driven safety tracker API."
+        keywords: ['projects', 'builds', 'codebase', 'develop', 'portfolio projects', 'show projects', 'list projects'],
+        response: "Here is a brief of Avinash's key projects with their GitHub repository links:<br/>" +
+                  "<div style='display: flex; flex-direction: column; gap: 8px; margin-top: 10px; max-height: 250px; overflow-y: auto; padding-right: 5px; text-align: left;'>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>1. Aladdin-Shield: ESG & Risk Auditor</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>ESG greenwashing NLP detector (FinBERT) + DCC-GARCH portfolio correlation. Deployed on Hugging Face Spaces.</span>" +
+                  "    <a href='https://github.com/havinashpatil' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil</a>" +
+                  "  </div>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>2. Blood Sense AI (Quantum ML)</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>Hybrid MobileNetV2 + Variational Quantum Circuits (VQC) for Acute Leukemia cell detection (96%+ recall, NAIN 2.0).</span>" +
+                  "    <a href='https://github.com/havinashpatil/BloodSenseAI' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil/BloodSenseAI</a>" +
+                  "  </div>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>3. CodeArena RL Benchmark</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>OpenEnv RL environment for code repair using GRPO. Meta PyTorch Grand Finalist (Top 2.5% of 31k teams).</span>" +
+                  "    <a href='https://github.com/havinashpatil' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil</a>" +
+                  "  </div>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>4. WellBot — AI Wellness Assistant</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>Multi-layer fallback wellness chatbot (Groq &rarr; Ollama &rarr; OpenAI Llama) developed during Infosys Springboard (Team Lead).</span>" +
+                  "    <a href='https://github.com/havinashpatil/Avinash-Patil_WellBot-Global-Wellness-Assistant-Chatbot_TeamA' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil/WellBot</a>" +
+                  "  </div>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>5. CAFA 6 Protein Predictor</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>Hybrid deep learning model (1D CNN + Bi-GRU) for sequence-to-function predictions.</span>" +
+                  "    <a href='https://github.com/havinashpatil' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil</a>" +
+                  "  </div>" +
+                  "  <div style='padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;'>" +
+                  "    <strong style='font-size: 13px; color: #fff; display: block;'>6. Echo Check — Safety Monitor</strong>" +
+                  "    <span style='font-size: 11px; color: var(--text-muted); display: block; margin: 4px 0 6px;'>Real-time tracking and event-driven safety monitor application using JWT and MongoDB.</span>" +
+                  "    <a href='https://github.com/havinashpatil/EchoCheck' target='_blank' style='font-size: 11.5px; color: var(--color-cyan); text-decoration: none; font-family: var(--font-mono);'><i class='fa-brands fa-github'></i> github.com/havinashpatil/EchoCheck</a>" +
+                  "  </div>" +
+                  "</div>"
       },
       project_aladdin: {
         keywords: ['aladdin', 'shield', 'esg', 'greenwashing', 'risk auditor', 'blackrock', 'finbert', 'dcc'],
@@ -2297,14 +2324,26 @@
                   "• <strong>NAIN 2.0 Submission</strong>: Blood Sense AI hybrid quantum detection model."
       },
       certifications: {
-        keywords: ['certifications', 'badges', 'credly', 'ibm', 'aws', 'oracle', 'stanford', 'matlab', 'pml', 'qml'],
-        response: "Avinash holds several industry credentials:<br/>" +
-                  "• <strong>IBM QML 2026</strong>: Certified in Quantum Machine Learning algorithms.<br/>" +
-                  "• <strong>AWS Generative AI Practitioner</strong> &amp; AWS Cloud Quest.<br/>" +
-                  "• <strong>AWS Certified Cloud Practitioner</strong>.<br/>" +
-                  "• <strong>Oracle OCI AI Foundations Associate 2025</strong>.<br/>" +
-                  "• <strong>Stanford Deep Learning Specialization</strong>.<br/>" +
-                  "View certificates: <a href='https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing' target='_blank' style='color:var(--color-cyan)'>Google Drive Folder</a>."
+        keywords: ['certifications', 'certificates', 'badges', 'credly', 'ibm', 'aws', 'oracle', 'stanford', 'matlab', 'pml', 'qml', 'show certificates', 'list certificates'],
+        response: "Here is a brief of Avinash's certified credentials. You can click on any card to verify online:<br/>" +
+                  "<div style='display: flex; flex-direction: column; gap: 8px; margin-top: 10px; text-align: left;'>" +
+                  "  <a href='https://www.credly.com/badges/1d41ff2b-e198-4560-a1a1-7cec1f0373ae/public_url' target='_blank' style='display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s;' onmouseover='this.style.borderColor=\"var(--color-cyan)\"' onmouseout='this.style.borderColor=\"rgba(255,255,255,0.08)\"'>" +
+                  "    <span style='font-size: 20px; color: var(--color-cyan);'><i class='fa-solid fa-atom'></i></span>" +
+                  "    <div><strong style='display: block; font-size: 13px; color: #fff;'>IBM QML 2026</strong><span style='font-size: 11px; color: var(--text-muted);'>Quantum Machine Learning algorithms</span></div>" +
+                  "  </a>" +
+                  "  <a href='https://www.credly.com/badges/8d83a099-e772-40a4-907c-76c6e154ca39/public_url' target='_blank' style='display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s;' onmouseover='this.style.borderColor=\"var(--color-cyan)\"' onmouseout='this.style.borderColor=\"rgba(255,255,255,0.08)\"'>" +
+                  "    <span style='font-size: 20px; color: var(--color-cyan);'><i class='fa-solid fa-cloud'></i></span>" +
+                  "    <div><strong style='display: block; font-size: 13px; color: #fff;'>AWS Gen AI Practitioner</strong><span style='font-size: 11px; color: var(--text-muted);'>AWS Cloud Quest Generative AI</span></div>" +
+                  "  </a>" +
+                  "  <a href='https://www.credly.com/badges/3ff89041-2947-4d1d-9412-7172a60716ba/public_url' target='_blank' style='display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s;' onmouseover='this.style.borderColor=\"var(--color-cyan)\"' onmouseout='this.style.borderColor=\"rgba(255,255,255,0.08)\"'>" +
+                  "    <span style='font-size: 20px; color: var(--color-cyan);'><i class='fa-brands fa-aws'></i></span>" +
+                  "    <div><strong style='display: block; font-size: 13px; color: #fff;'>AWS Cloud Quest: Cloud Practitioner</strong><span style='font-size: 11px; color: var(--text-muted);'>Cloud Solutions Infrastructure</span></div>" +
+                  "  </a>" +
+                  "  <a href='https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing' target='_blank' style='display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(171, 32, 255, 0.05); border: 1px solid rgba(171, 32, 255, 0.25); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s;' onmouseover='this.style.borderColor=\"var(--color-purple)\"' onmouseout='this.style.borderColor=\"rgba(171, 32, 255, 0.25)\"'>" +
+                  "    <span style='font-size: 20px; color: var(--color-purple);'><i class='fa-solid fa-folder-open'></i></span>" +
+                  "    <div><strong style='display: block; font-size: 13px; color: #fff;'>View All Certifications Folder</strong><span style='font-size: 11px; color: var(--text-muted);'>Oracle OCI, Stanford DL, ServiceNow, etc.</span></div>" +
+                  "  </a>" +
+                  "</div>"
       },
       class: {
         keywords: ['usn', 'roll number', 'student', 'id', 'college', 'bitm', 'gpa', 'grades', 'academic'],
