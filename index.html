@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avinash Patil | AI & ML Systems Engineer</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="AI/ML Engineering student at BITM Ballari. Creator of Aladdin-Shield ESG Auditor, Blood Sense AI, CodeArena RL, and WellBot. Discover projects, research, and certifications." />
+  <meta name="keywords" content="Avinash Patil, AI Engineer, Machine Learning, Deep Learning, Quantum ML, Portfolio, Aladdin-Shield, Blood Sense AI, BITM" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Avinash Patil | AI & ML Systems Engineer" />
+  <meta property="og:description" content="Portfolio of Avinash Patil, AI/ML Engineering student specializing in Deep Learning, NLP, and Quantum ML." />
+  <meta property="og:type" content="website" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons (FontAwesome CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Three.js (for 3D background) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* ── DESIGN SYSTEM & CSS VARIABLES ── */
+    :root {
+      --bg-dark: #030712;
+      --bg-card: rgba(10, 15, 30, 0.7);
+      --bg-card-hover: rgba(17, 24, 48, 0.85);
+      
+      /* Neon Accents */
+      --color-cyan: #00f3ff;
+      --color-cyan-glow: rgba(0, 243, 255, 0.4);
+      --color-purple: #ab20ff;
+      --color-purple-glow: rgba(171, 32, 255, 0.4);
+      --color-green: #39ff14;
+      --color-green-glow: rgba(57, 255, 20, 0.3);
+      
+      /* Typography Colors */
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      
+      /* Glassmorphism */
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-hover: rgba(0, 243, 255, 0.3);
+      --glass-shadow: rgba(0, 0, 0, 0.5);
+      
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── BASE STYLES ── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+    
+    body {
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(171, 32, 255, 0.3);
+      border-radius: 4px;
+      border: 2px solid var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-cyan);
+    }
+
+    /* ── 3D CANVAS BACKGROUND ── */
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, #0c102b 0%, var(--bg-dark) 100%);
+    }
+
+    /* ── GLASS CONTAINER GRID ── */
+    .glass-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px var(--glass-shadow);
+      transition: var(--transition-smooth);
+    }
+    
+    .glass-panel:hover {
+      border-color: var(--glass-border-hover);
+      box-shadow: 0 12px 40px rgba(0, 243, 255, 0.15);
+    }
+
+    /* ── NAVBAR ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      z-index: 100;
+      background: rgba(3, 7, 18, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      transition: var(--transition-smooth);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-hexagon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-dark);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      text-shadow: 0 0 1px rgba(0,0,0,0.5);
+    }
+
+    .logo-text {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #fff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-cyan);
+      box-shadow: 0 0 8px var(--color-cyan);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-cyan);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn-resume {
+      background: linear-gradient(135deg, var(--color-cyan-glow), var(--color-purple-glow));
+      border: 1px solid var(--color-cyan);
+      color: var(--color-cyan);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-resume:hover {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      color: var(--bg-dark);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      color: var(--text-main);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* ── HERO SECTION ── */
+    #hero {
+      min-height: 100vh;
+      padding: 120px 5% 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-glow-blob {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, rgba(171, 32, 255, 0.15) 0%, transparent 60%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      background: rgba(171, 32, 255, 0.12);
+      border: 1px solid rgba(171, 32, 255, 0.35);
+      color: #df9eff;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(171, 32, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #df9eff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #df9eff;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: clamp(48px, 8vw, 84px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .hero-name span {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(0, 243, 255, 0.2);
+    }
+
+    .hero-title {
+      font-size: clamp(16px, 3vw, 24px);
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      max-width: 800px;
+      font-family: var(--font-heading);
+    }
+
+    .terminal-container {
+      background: rgba(5, 5, 10, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      max-width: 600px;
+      width: 90%;
+      margin-bottom: 40px;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-cyan);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-left: 3px solid var(--color-cyan);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .terminal-prefix {
+      color: var(--color-purple);
+      user-select: none;
+      font-weight: 700;
+    }
+
+    .terminal-text {
+      color: var(--text-main);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: var(--color-cyan);
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      color: var(--bg-dark);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0, 243, 255, 0.3);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 30px rgba(0, 243, 255, 0.6);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--glass-border-hover);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-cyan);
+      display: block;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    /* ── MAIN LAYOUT WRAPPER ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* ── COMMON SECTION STYLE ── */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 45px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, var(--color-cyan), var(--color-purple));
+      border-radius: 2px;
+    }
+
+    /* ── SKILLS SECTION ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .skills-category {
+      padding: 30px;
+      height: 100%;
+    }
+
+    .skills-category h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .skills-category h3 i {
+      color: var(--color-cyan);
+      text-shadow: 0 0 10px var(--color-cyan-glow);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      transition: var(--transition-smooth);
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+      background: rgba(0, 243, 255, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.15);
+    }
+
+    .skill-tag.highlight {
+      border-color: rgba(171, 32, 255, 0.4);
+      color: #e5bfff;
+      background: rgba(171, 32, 255, 0.08);
+    }
+    
+    .skill-tag.highlight:hover {
+      border-color: var(--color-purple);
+      color: #f2dfff;
+      background: rgba(171, 32, 255, 0.15);
+      box-shadow: 0 0 12px rgba(171, 32, 255, 0.25);
+    }
+
+    /* ── PROJECTS SECTION ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .project-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    /* Specification for the Specular Shimmer effect */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-status {
+      align-self: flex-start;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .status-active {
+      background: rgba(0, 243, 255, 0.08);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      color: var(--color-cyan);
+    }
+
+    .status-flagship {
+      background: rgba(171, 32, 255, 0.1);
+      border: 1px solid rgba(171, 32, 255, 0.35);
+      color: #df9eff;
+      box-shadow: 0 0 10px rgba(171, 32, 255, 0.1);
+    }
+
+    .status-completed {
+      background: rgba(57, 255, 20, 0.05);
+      border: 1px solid rgba(57, 255, 20, 0.25);
+      color: var(--color-green);
+    }
+    
+    .status-finalist {
+      background: rgba(255, 170, 0, 0.08);
+      border: 1px solid rgba(255, 170, 0, 0.3);
+      color: #ffaa00;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .project-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--color-cyan);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 14px;
+    }
+
+    .project-link-icon {
+      color: var(--text-muted);
+      font-size: 18px;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+    }
+
+    .project-link-icon:hover {
+      color: var(--color-cyan);
+      transform: translateY(-2px);
+    }
+
+    .project-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: rgba(3, 7, 18, 0.5);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .project-metric {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 15px;
+      margin-top: auto;
+    }
+
+    .project-metric i {
+      font-size: 11px;
+    }
+
+    /* ── EXPERIENCE SECTION ── */
+    .timeline {
+      position: relative;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 100px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--color-cyan), var(--color-purple), transparent);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 40px;
+      margin-bottom: 45px;
+      position: relative;
+    }
+
+    .timeline-date {
+      text-align: right;
+      padding-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: 95px;
+      top: 11px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--color-cyan);
+      box-shadow: 0 0 10px var(--color-cyan);
+      z-index: 10;
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-item:hover .timeline-node {
+      background: var(--color-cyan);
+      box-shadow: 0 0 15px var(--color-cyan);
+      transform: scale(1.2);
+    }
+    
+    .timeline-node.edu {
+      border-color: var(--color-purple);
+      box-shadow: 0 0 10px var(--color-purple);
+    }
+
+    .timeline-item:hover .timeline-node.edu {
+      background: var(--color-purple);
+      box-shadow: 0 0 15px var(--color-purple);
+    }
+
+    .timeline-content {
+      padding: 24px 30px;
+    }
+
+    .timeline-role {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .timeline-org {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-cyan);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .timeline-org.edu {
+      color: #c985ff;
+    }
+
+    .timeline-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CERTIFICATIONS SECTION ── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .cert-card {
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cert-icon {
+      font-size: 26px;
+      color: var(--color-cyan);
+      background: rgba(0, 243, 255, 0.08);
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      transition: var(--transition-smooth);
+    }
+
+    .cert-card:hover .cert-icon {
+      background: var(--color-cyan);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px var(--color-cyan);
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+
+    .cert-info h4 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .cert-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .cert-info .cert-verify {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--color-cyan);
+      font-weight: 500;
+    }
+
+    .certs-cta-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-info-text {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .contact-bullet {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--color-cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-bullet i {
+      font-size: 10px;
+    }
+
+    .contact-links-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .contact-card-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .contact-card-icon {
+      font-size: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card-link:hover .contact-card-icon {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+      border-color: transparent;
+    }
+
+    .contact-card-info h4 {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+
+    .contact-card-info p {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .contact-card-link:hover .contact-card-info p {
+      color: var(--color-cyan);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 40px 5%;
+      margin-top: 100px;
+      background: rgba(3, 7, 18, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-text {
+      color: var(--text-dim);
+      font-size: 12.5px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .footer-logo span {
+      color: var(--color-cyan);
+    }
+
+    /* ── CHATBOT HUD UI ── */
+    #chat-fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 200;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-dark);
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 243, 255, 0.4);
+      transition: var(--transition-smooth);
+    }
+
+    #chat-fab:hover {
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 6px 25px rgba(0, 243, 255, 0.6);
+    }
+
+    .chat-fab-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--color-green);
+      color: var(--bg-dark);
+      font-size: 9px;
+      font-weight: 800;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-dark);
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(57, 255, 20, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+    }
+
+    #chatbot-window {
+      position: fixed;
+      bottom: 105px;
+      right: 30px;
+      width: 380px;
+      height: 580px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-origin: bottom right;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+      pointer-events: none;
+    }
+
+    #chatbot-window.active {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, rgba(10, 15, 30, 0.95), rgba(17, 24, 48, 0.95));
+      border-bottom: 1px solid var(--glass-border);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--bg-dark);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+
+    .chat-header-info {
+      flex-grow: 1;
+    }
+
+    .chat-header-name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .chat-header-status {
+      font-size: 11px;
+      color: var(--color-green);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+    }
+
+    .chat-header-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--color-green);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 6px var(--color-green);
+    }
+
+    .chat-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .chat-close:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(5, 7, 18, 0.95);
+      scrollbar-width: thin;
+      scrollbar-color: var(--glass-border) transparent;
+    }
+
+    .msg {
+      display: flex;
+      gap: 10px;
+      max-width: 85%;
+    }
+
+    .msg-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .msg-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .msg.bot {
+      align-self: flex-start;
+    }
+
+    .msg.bot .msg-bubble {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      border-radius: 4px 12px 12px 12px;
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+      max-width: 80%;
+    }
+
+    .msg.user .msg-bubble {
+      background: linear-gradient(135deg, var(--color-cyan), #00a6ff);
+      color: var(--bg-dark);
+      font-weight: 500;
+      border-radius: 12px 4px 12px 12px;
+      box-shadow: 0 4px 12px rgba(0, 243, 255, 0.15);
+    }
+
+    .msg.user .msg-icon {
+      display: none;
+    }
+
+    .chat-suggestions {
+      padding: 10px 20px;
+      background: rgba(5, 7, 18, 0.95);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-top: 1px solid rgba(255,255,255,0.02);
+    }
+
+    .suggestion-chip {
+      font-size: 11px;
+      color: var(--color-cyan);
+      border: 1px solid rgba(0, 243, 255, 0.25);
+      background: rgba(0, 243, 255, 0.05);
+      padding: 5px 12px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+    }
+
+    .suggestion-chip:hover {
+      background: var(--color-cyan);
+      color: var(--bg-dark);
+      border-color: transparent;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+
+    .chat-input-area {
+      padding: 15px 20px;
+      background: rgba(10, 15, 30, 0.98);
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chat-textarea {
+      flex-grow: 1;
+      background: rgba(3, 7, 18, 0.5);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      resize: none;
+      height: 40px;
+      font-family: var(--font-body);
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .chat-textarea:focus {
+      border-color: var(--color-cyan);
+      background: rgba(3, 7, 18, 0.8);
+    }
+
+    .chat-send-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--color-cyan);
+      color: var(--bg-dark);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: var(--transition-smooth);
+    }
+
+    .chat-send-btn:hover {
+      background: var(--color-purple);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(171, 32, 255, 0.4);
+    }
+
+    /* Typing bubble */
+    .typing-bubble {
+      display: flex;
+      gap: 4px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px 12px 12px 12px;
+      width: fit-content;
+      align-items: center;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--text-dim);
+      border-radius: 50%;
+      animation: typing-anim 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing-anim {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* ── RESPONSIVE DESIGN ── */
+    @media (max-width: 968px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .timeline::before {
+        left: 20px;
+      }
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .timeline-date {
+        text-align: left;
+        padding-left: 35px;
+      }
+      .timeline-node {
+        left: 15px;
+      }
+      .timeline-content {
+        padding: 10px 0 10px 35px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 0 20px;
+      }
+      nav {
+        display: none; /* Mobile Navigation Toggle Needed */
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+      #chatbot-window {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+        bottom: 95px;
+      }
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 3D Canvas Background -->
+  <div id="canvas-container"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo-container">
+      <div class="logo-hexagon">AP</div>
+      <span class="logo-text">AVINASH PATIL</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing" target="_blank" class="btn-resume">Resume <i class="fa-solid fa-cloud-arrow-down" style="margin-left: 5px;"></i></a>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMobileMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <div class="hero-glow-blob"></div>
+    <div class="hero-tag">AVAILABLE FOR OPPORTUNITIES</div>
+    <h1 class="hero-name">Avinash <span>Patil</span></h1>
+    <h2 class="hero-title">AI/ML Engineering Student &amp; Deep Learning Specialist</h2>
+    
+    <div class="terminal-container">
+      <span class="terminal-prefix">&gt;_</span>
+      <span class="terminal-text" id="typewriter-text">building intelligent systems that matter</span>
+      <span class="cursor"></span>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">Explore Projects <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#contact" class="btn-secondary">Let's Connect <i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <div class="hero-stats glass-panel">
+      <div class="stat-card">
+        <span class="stat-number">Top 2.5%</span>
+        <span class="stat-label">Meta Hackathon</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">96%+</span>
+        <span class="stat-label">Blood AI Recall</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">7.74</span>
+        <span class="stat-label">GPA BITM</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">6+</span>
+        <span class="stat-label">AI Certifications</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN AREA -->
+  <main>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="reveal">
+      <span class="section-eyebrow">01 // overview</span>
+      <h2 class="section-title">The Mission</h2>
+      <div class="glass-panel" style="padding: 40px; line-height: 1.8; color: var(--text-muted); font-size: 15.5px;">
+        <p style="margin-bottom: 20px;">
+          I am an ambitious <strong>Artificial Intelligence &amp; Machine Learning Engineering</strong> student at Ballari Institute of Technology and Management (BITM), Karnataka, India (Class of 2027). Driven by a dual passion for high-performance AI systems and financial modeling/asset management, my career objective is to engineer production-ready intelligence pipelines for top-tier firms like BlackRock or Anthropic.
+        </p>
+        <p>
+          Currently in my 6th semester with a <strong>7.74/10 GPA</strong>, I build deep learning detectors, reinforcement learning benchmarks, and financial risk auditors. I focus on merging quantum circuits with neural networks, exploring advanced optimization techniques (like GRPO in RL), and scaling multi-provider LLM orchestration networks.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="reveal">
+      <span class="section-eyebrow">02 // capability</span>
+      <h2 class="section-title">Technical Arsenal</h2>
+      <div class="skills-grid">
+        
+        <!-- Category 1 -->
+        <div class="skills-category glass-panel">
+          <h3><i class="fa-solid fa-brain"></i> AI &amp; Deep Learning</h3>
+          <div class="skills-list">
+            <span class="skill-tag highlight">Python</span>
+            <span class="skill-tag highlight">PyTorch</span>
+            <span class="skill-tag highlight">TensorFlow</span>
+            <span class="skill-tag highlight">Hugging Face</span>
+            <span class="skill-tag">NLP Pipelines</span>
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag highlight">Quantum ML</span>
+            <span class="skill-tag">Ollama</span>
+            <span class="skill-tag">Transfer Learning</span>
+          </div>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="skills-category glass-panel">
+          <h3><i class="fa-solid fa-code"></i> Engineering &amp; APIs</h3>
+          <div class="skills-list">
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">JWT Auth</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="skills-category glass-panel">
+          <h3><i class="fa-solid fa-sliders"></i> Systems &amp; Analytics</h3>
+          <div class="skills-list">
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">AWS Cloud</span>
+            <span class="skill-tag">Google Cloud</span>
+            <span class="skill-tag">Oracle Cloud</span>
+            <span class="skill-tag">Git / GitHub</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Pandas &amp; NumPy</span>
+            <span class="skill-tag">DCC-GARCH</span>
+            <span class="skill-tag">FinBERT</span>
+            <span class="skill-tag">Excel</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="reveal">
+      <span class="section-eyebrow">03 // validation</span>
+      <h2 class="section-title">Selected Builds</h2>
+      <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-active"><i class="fa-solid fa-microchip" style="margin-right: 5px;"></i> Phase 1 In Progress</span>
+          <div class="project-header">
+            <h3 class="project-title">Aladdin-Shield: ESG &amp; Risk Auditor</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Verifiable ESG greenwashing detection system targeting BlackRock Aladdin-level asset portfolio analysis. Employs ProsusAI/finbert for complex sentiment modeling and NLP-based auditing, combined with DCC-GARCH correlation models to quantify system risk.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">FinBERT</span>
+            <span class="tech-pill">DCC-GARCH</span>
+            <span class="tech-pill">Hugging Face</span>
+            <span class="tech-pill">NLP</span>
+            <span class="tech-pill">Python</span>
+          </div>
+          <div class="project-metric">
+            <i class="fa-solid fa-circle-nodes"></i> Deployed to Hugging Face Spaces
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-flagship"><i class="fa-solid fa-dna" style="margin-right: 5px;"></i> Flagship Quantum AI</span>
+          <div class="project-header">
+            <h3 class="project-title">Blood Sense AI</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil/BloodSenseAI" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Hybrid AI-Quantum MobileNetV2 + Variational Quantum Circuit (VQC) model built for Acute Lymphoblastic Leukemia (ALL) detection from peripheral blood smear images. Achieved 96%+ recall on clinical ALL-IDB and BCCD datasets.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">MobileNetV2</span>
+            <span class="tech-pill">VQC</span>
+            <span class="tech-pill">TensorFlow</span>
+            <span class="tech-pill">OpenCV</span>
+            <span class="tech-pill">Quantum ML</span>
+          </div>
+          <div class="project-metric">
+            <i class="fa-solid fa-chart-line"></i> 96%+ Malignant recall / NAIN 2.0
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-finalist"><i class="fa-solid fa-award" style="margin-right: 5px;"></i> National Finalist (Top 2.5%)</span>
+          <div class="project-header">
+            <h3 class="project-title">CodeArena RL Benchmark</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Reinforcement Learning benchmark utilizing Group Relative Policy Optimization (GRPO) in an OpenEnv environment for iterative code repair. Implements a dual-grading system calculating Big-O complexity and security bounds to prevent reward hacking.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">GRPO</span>
+            <span class="tech-pill">OpenEnv</span>
+            <span class="tech-pill">PyTorch TRL</span>
+            <span class="tech-pill">FastAPI</span>
+            <span class="tech-pill">Python</span>
+          </div>
+          <div class="project-metric" style="color: #ffaa00;">
+            <i class="fa-solid fa-trophy"></i> Meta PyTorch Finalist — Top 2.5% of 31k Teams
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-completed"><i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> Deployed &amp; Verified</span>
+          <div class="project-header">
+            <h3 class="project-title">WellBot — Wellness Assistant</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil/Avinash-Patil_WellBot-Global-Wellness-Assistant-Chatbot_TeamA" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Team Lead for WellBot wellness assistant. Engineered a multi-layer LLM fallback stack (Groq API Llama &rarr; Local Ollama &rarr; OpenAI GPT) ensuring robust, fail-safe uptime. Featuring real-time facial emotion recognition and analytical dashboards.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Groq/Ollama</span>
+            <span class="tech-pill">Flask</span>
+            <span class="tech-pill">React.js</span>
+            <span class="tech-pill">Power BI</span>
+            <span class="tech-pill">OpenCV</span>
+          </div>
+          <div class="project-metric">
+            <i class="fa-solid fa-shield-halved"></i> 100% Failover Uptime UAT Complete
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-completed"><i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> Research</span>
+          <div class="project-header">
+            <h3 class="project-title">CAFA 6 Protein Function Prediction</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Deep hybrid network integrating a 1D Convolutional Neural Network (1D CNN) and a Bidirectional GRU (Bi-GRU) for sequence-to-function annotations. Normalized 82k+ protein sequences for validation, producing highly resilient inference scores.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">1D CNN</span>
+            <span class="tech-pill">Bi-GRU</span>
+            <span class="tech-pill">TensorFlow</span>
+            <span class="tech-pill">BioPython</span>
+            <span class="tech-pill">NumPy</span>
+          </div>
+          <div class="project-metric">
+            <i class="fa-solid fa-flask"></i> Processed 82,404 Sequences Successfully
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card glass-panel" data-tilt>
+          <span class="project-status status-completed"><i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> Deployed</span>
+          <div class="project-header">
+            <h3 class="project-title">Echo Check — Safety Monitor</h3>
+            <div class="project-links">
+              <a href="https://github.com/havinashpatil/EchoCheck" target="_blank" class="project-link-icon" title="View Codebase"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Real-time personal safety application tracking active GPS nodes and triggering event-driven backend automated location shares during SOS interrupts. Built with a secure JWT authenticated JSON API layer and MongoDB.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Python Flask</span>
+            <span class="tech-pill">MongoDB</span>
+            <span class="tech-pill">JWT</span>
+            <span class="tech-pill">REST API</span>
+            <span class="tech-pill">JavaScript</span>
+          </div>
+          <div class="project-metric">
+            <i class="fa-solid fa-clock"></i> Secure Event-Driven Backend Deployed
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="reveal">
+      <span class="section-eyebrow">04 // journey</span>
+      <h2 class="section-title">Timeline</h2>
+      <div class="timeline">
+
+        <!-- Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-date">Feb – Apr 2026</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content glass-panel">
+            <h3 class="timeline-role">AI &amp; ML Virtual Intern (Team Lead)</h3>
+            <span class="timeline-org">Infosys Springboard</span>
+            <p class="timeline-desc">
+              Led the design and integration of "WellBot", a production-ready mental wellness chatbot. Orchestrated a multi-LLM fallback architecture (Groq API, Ollama, OpenAI) that ensured zero downtime. Crafted interactive dashboards in Power BI to report wellness analytics metrics to stakeholders.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-date">Dec 2024</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content glass-panel">
+            <h3 class="timeline-role">Finance Research Analyst</h3>
+            <span class="timeline-org">Gravitas Masters, Ballari (Remote)</span>
+            <p class="timeline-desc">
+              Conducted quantitative and qualitative analysis of global market trends, stock valuations, and financial filings. Produced corporate risk profiles to guide strategic asset allocations and investment decisions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-date">Sep 2024</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content glass-panel">
+            <h3 class="timeline-role">Python Programming Intern</h3>
+            <span class="timeline-org">BITM &times; EZTS</span>
+            <p class="timeline-desc">
+              Developed functional algorithms, resolved structural programming tasks, and built backend logic modules during an intensive industry-aligned software engineering workshop.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="timeline-item">
+          <div class="timeline-date">2023 – 2027</div>
+          <div class="timeline-node edu"></div>
+          <div class="timeline-content glass-panel">
+            <h3 class="timeline-role">B.E. in Artificial Intelligence &amp; Machine Learning</h3>
+            <span class="timeline-org edu">Ballari Institute of Technology and Management (BITM)</span>
+            <p class="timeline-desc">
+              6th Semester | GPA: <strong>7.74/10</strong> | USN: <strong>3BR23AI015</strong><br/>
+              <em>Key Coursework:</em> Machine Learning, Deep Learning, Natural Language Processing, Generative AI Systems, Data Structures &amp; Algorithms, Quantum Computing.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS & CREDLY BADGES -->
+    <section id="certifications" class="reveal">
+      <span class="section-eyebrow">05 // credentials</span>
+      <h2 class="section-title">Certifications</h2>
+      
+      <div class="cert-grid">
+        
+        <!-- Cert 1 -->
+        <a href="https://www.credly.com/badges/1d41ff2b-e198-4560-a1a1-7cec1f0373ae/public_url" target="_blank" class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-solid fa-atom"></i></div>
+          <div class="cert-info">
+            <h4>IBM QML Certification</h4>
+            <p>IBM quantum validation training in Quantum Machine Learning algorithms — 2026</p>
+            <span class="cert-verify"><i class="fa-solid fa-arrow-up-right-from-square"></i> Credly Badge</span>
+          </div>
+        </a>
+
+        <!-- Cert 2 -->
+        <a href="https://www.credly.com/badges/8d83a099-e772-40a4-907c-76c6e154ca39/public_url" target="_blank" class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-solid fa-cloud"></i></div>
+          <div class="cert-info">
+            <h4>AWS Gen AI Practitioner</h4>
+            <p>AWS Cloud Quest certification for building scalable generative AI applications on AWS</p>
+            <span class="cert-verify"><i class="fa-solid fa-arrow-up-right-from-square"></i> Credly Badge</span>
+          </div>
+        </a>
+
+        <!-- Cert 3 -->
+        <a href="https://www.credly.com/badges/3ff89041-2947-4d1d-9412-7172a60716ba/public_url" target="_blank" class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-brands fa-aws"></i></div>
+          <div class="cert-info">
+            <h4>AWS Cloud Quest: Cloud Practitioner</h4>
+            <p>AWS Cloud Quest certification for foundational cloud solutions infrastructure design</p>
+            <span class="cert-verify"><i class="fa-solid fa-arrow-up-right-from-square"></i> Credly Badge</span>
+          </div>
+        </a>
+
+        <!-- Cert 4 -->
+        <div class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="cert-info">
+            <h4>Oracle OCI AI Foundations 2025</h4>
+            <p>Associate level certification for OCI Cloud infrastructure AI components implementation</p>
+            <span class="cert-verify" style="color:var(--text-dim);cursor:default;"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <!-- Cert 5 -->
+        <div class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="cert-info">
+            <h4>Stanford Deep Learning</h4>
+            <p>Deep Learning Specialization certificate focusing on neural networks, backpropagation, and CNNs</p>
+            <span class="cert-verify" style="color:var(--text-dim);cursor:default;"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <!-- Cert 6 -->
+        <div class="cert-card glass-panel" data-tilt>
+          <div class="cert-icon"><i class="fa-solid fa-shield"></i></div>
+          <div class="cert-info">
+            <h4>ServiceNow Training Program</h4>
+            <p>ServiceNow Micro-Certification completed through the BITM Placement Cell — May 2026</p>
+            <span class="cert-verify" style="color:var(--text-dim);cursor:default;"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="certs-cta-container">
+        <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 15px;">
+          Other certifications include: Kaggle ML, Infosys Virtual Internship, Android using Kotlin (Infosys), MATLAB Onramp, and Python Essentials.
+        </p>
+        <a href="https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing" target="_blank" class="btn-secondary">View All Certifications Folder <i class="fa-solid fa-folder-open" style="margin-left: 5px;"></i></a>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="reveal">
+      <span class="section-eyebrow">06 // communication</span>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-info-text">
+            I'm currently seeking AI/ML engineering roles, advanced deep learning internships, and financial-AI research collaborations. If you're building state-of-the-art models or trading strategies — let's build together.
+          </p>
+          
+          <div class="contact-bullet"><i class="fa-solid fa-circle"></i> Currently building: Aladdin-Shield ESG NLP auditor</div>
+          <div class="contact-bullet"><i class="fa-solid fa-circle"></i> Open to: Full-time Roles, Internships, Remote Collabs</div>
+          <div class="contact-bullet"><i class="fa-solid fa-circle"></i> Location: Ballari, Karnataka, India (Open to Relocation)</div>
+        </div>
+        
+        <div>
+          <div class="contact-links-grid">
+            <a href="mailto:avinashavinashgouda@gmail.com" class="contact-card-link glass-panel">
+              <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-card-info">
+                <h4>Email</h4>
+                <p>avinashavinashgouda@gmail.com</p>
+              </div>
+            </a>
+            
+            <a href="tel:+919980818645" class="contact-card-link glass-panel">
+              <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-card-info">
+                <h4>Phone</h4>
+                <p>+91 99808 18645</p>
+              </div>
+            </a>
+
+            <a href="https://linkedin.com/in/avinash-patil-b089aa291" target="_blank" class="contact-card-link glass-panel">
+              <div class="contact-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div class="contact-card-info">
+                <h4>LinkedIn</h4>
+                <p>linkedin.com/in/avinash-patil-b089aa291</p>
+              </div>
+            </a>
+
+            <a href="https://github.com/havinashpatil" target="_blank" class="contact-card-link glass-panel">
+              <div class="contact-card-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="contact-card-info">
+                <h4>GitHub</h4>
+                <p>github.com/havinashpatil</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-text">
+      <p>© 2026 Avinash Patil. All rights reserved.</p>
+      <p style="margin-top: 5px; color: var(--text-dim);">AI/ML Systems Student · BITM Ballari (USN: 3BR23AI015) · GPA 7.74</p>
+    </div>
+    <div class="footer-logo">
+      AVINASH <span>PATIL</span>
+    </div>
+  </footer>
+
+  <!-- CHATBOT FAB -->
+  <button id="chat-fab" onclick="toggleChatWindow()" aria-label="Open AI Assistant">
+    <i class="fa-solid fa-message-bot" id="chat-fab-icon" style="display: none;"></i>
+    <span id="chat-fab-icon-alt">🤖</span>
+    <span class="chat-fab-badge">AI</span>
+  </button>
+
+  <!-- CHATBOT WINDOW -->
+  <div id="chatbot-window" class="glass-panel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Avinash's Portfolio Assistant</div>
+        <div class="chat-header-status">Online - Ask me anything</div>
+      </div>
+      <button class="chat-close" onclick="toggleChatWindow()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg bot">
+        <div class="msg-icon">🤖</div>
+        <div class="msg-bubble">
+          Hello! I am Avinash Patil's AI portfolio assistant. I can answer questions about his skills, projects, hackathon achievements, certifications, or career goals. Ask me anything!
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-suggestions">
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Active projects?')">Active projects?</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Meta hackathon win?')">Meta hackathon win?</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Contact details?')">Contact details?</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Technical skills?')">Technical skills?</span>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea class="chat-textarea" id="chat-input" placeholder="Type a message..." onkeydown="handleChatInputKeyDown(event)"></textarea>
+      <button class="chat-send-btn" onclick="sendUserMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- SCRIPT BLOCK -->
+  <script>
+    /* ── MOBILE MENU TOGGLE ── */
+    function toggleMobileMenu() {
+      const nav = document.querySelector('nav');
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '70px';
+        nav.style.left = '0';
+        nav.style.width = '100%';
+        nav.style.background = 'rgba(3, 7, 18, 0.95)';
+        nav.style.padding = '20px';
+        nav.style.borderBottom = '1px solid var(--glass-border)';
+      }
+    }
+
+    /* ── TYPEWRITER DYNAMIC TERMINAL EFFECT ── */
+    const phrases = [
+      "building intelligent systems that matter",
+      "training quantum-classical hybrid models",
+      "auditing ESG portfolio assets with NLP",
+      "developing leukemia diagnostics using QML",
+      "reinforcing agent networks using GRPO"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterElement = document.getElementById("typewriter-text");
+    const typingSpeed = 60;
+    const deletingSpeed = 30;
+    const delayBetweenPhrases = 2500;
+
+    function typeWriter() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        setTimeout(typeWriter, delayBetweenPhrases);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(typeWriter, 500);
+      } else {
+        setTimeout(typeWriter, isDeleting ? deletingSpeed : typingSpeed);
+      }
+    }
+    
+    // Start Typewriter
+    setTimeout(typeWriter, 1000);
+
+    /* ── THREE.JS NEURAL CONSTELLATION BACKGROUND ── */
+    let scene, camera, renderer, particleSystem, linesSystem;
+    const particleCount = 120;
+    const maxConnectionDistance = 100;
+    let particlesData = [];
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+    
+    const container = document.getElementById('canvas-container');
+
+    function initThree() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+      camera.position.z = 400;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        // Random position in box
+        const x = Math.random() * 800 - 400;
+        const y = Math.random() * 800 - 400;
+        const z = Math.random() * 800 - 400;
+
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        // Custom velocity vector
+        particlesData.push({
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.8,
+            (Math.random() - 0.5) * 0.8,
+            (Math.random() - 0.5) * 0.8
+          ),
+          numConnections: 0
+        });
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      // Draw custom glowing circles
+      const material = new THREE.PointsMaterial({
+        color: 0x00f3ff,
+        size: 3.5,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true
+      });
+
+      particleSystem = new THREE.Points(geometry, material);
+      scene.add(particleSystem);
+
+      // Line segments connection
+      const lineGeometry = new THREE.BufferGeometry();
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0xab20ff,
+        transparent: true,
+        opacity: 0.12,
+        linewidth: 1
+      });
+
+      linesSystem = new THREE.LineSegments(lineGeometry, lineMaterial);
+      scene.add(linesSystem);
+
+      window.addEventListener('resize', onWindowResize);
+      document.addEventListener('mousemove', onDocumentMouseMove);
+      
+      animateThree();
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function onDocumentMouseMove(event) {
+      targetMouseX = (event.clientX - window.innerWidth / 2) * 0.08;
+      targetMouseY = (event.clientY - window.innerHeight / 2) * 0.08;
+    }
+
+    function animateThree() {
+      requestAnimationFrame(animateThree);
+
+      // Smooth mouse tracking interpolation
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      // Subtle rotations
+      particleSystem.rotation.y += 0.001;
+      particleSystem.rotation.x += 0.0005;
+      linesSystem.rotation.y = particleSystem.rotation.y;
+      linesSystem.rotation.x = particleSystem.rotation.x;
+
+      // Adjust camera to look slightly at mouse position (3D Parallax effect)
+      camera.position.x += (mouseX - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      const positions = particleSystem.geometry.attributes.position.array;
+      const linePositions = [];
+      const lineColors = [];
+
+      // Move points
+      for (let i = 0; i < particleCount; i++) {
+        let x = positions[i * 3];
+        let y = positions[i * 3 + 1];
+        let z = positions[i * 3 + 2];
+
+        x += particlesData[i].velocity.x;
+        y += particlesData[i].velocity.y;
+        z += particlesData[i].velocity.z;
+
+        // Bounce bounds
+        if (x < -400 || x > 400) particlesData[i].velocity.x = -particlesData[i].velocity.x;
+        if (y < -400 || y > 400) particlesData[i].velocity.y = -particlesData[i].velocity.y;
+        if (z < -400 || z > 400) particlesData[i].velocity.z = -particlesData[i].velocity.z;
+
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+      }
+      
+      particleSystem.geometry.attributes.position.needsUpdate = true;
+
+      // Compute dynamic lines between close neighbors
+      for (let i = 0; i < particleCount; i++) {
+        const x1 = positions[i * 3];
+        const y1 = positions[i * 3 + 1];
+        const z1 = positions[i * 3 + 2];
+
+        for (let j = i + 1; j < particleCount; j++) {
+          const x2 = positions[j * 3];
+          const y2 = positions[j * 3 + 1];
+          const z2 = positions[j * 3 + 2];
+
+          const dist = Math.sqrt(
+            Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2)
+          );
+
+          if (dist < maxConnectionDistance) {
+            linePositions.push(x1, y1, z1);
+            linePositions.push(x2, y2, z2);
+          }
+        }
+      }
+
+      linesSystem.geometry.setAttribute(
+        'position',
+        new THREE.BufferAttribute(new Float32Array(linePositions), 3)
+      );
+      linesSystem.geometry.computeBoundingBox();
+      linesSystem.geometry.computeBoundingSphere();
+
+      renderer.render(scene, camera);
+    }
+
+    // Initialize Three.js on page load safely
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', initThree);
+    } else {
+      initThree();
+    }
+
+    /* ── SCROLL REVEAL ANIMATIONS ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    /* ── 3D HOLOGRAPHIC TILT EFFECT ── */
+    const tiltCards = document.querySelectorAll('[data-tilt]');
+    
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Convert mouse position to percentages for shimmer gradient
+        const px = (x / rect.width) * 100;
+        const py = (y / rect.height) * 100;
+        card.style.setProperty('--mouse-x', `${px}%`);
+        card.style.setProperty('--mouse-y', `${py}%`);
+        
+        // Calculate tilt amounts
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const tiltX = (centerY - y) / 10; // Max tilt 10deg
+        const tiltY = (x - centerX) / 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.borderColor = 'rgba(0, 243, 255, 0.4)';
+        card.style.boxShadow = `0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 243, 255, 0.1)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+        card.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
+      });
+    });
+
+    /* ── CHATBOT TOGGLE ── */
+    const chatbotWindow = document.getElementById('chatbot-window');
+    
+    function toggleChatWindow() {
+      chatbotWindow.classList.toggle('active');
+      if (chatbotWindow.classList.contains('active')) {
+        document.getElementById('chat-input').focus();
+      }
+    }
+
+    /* ── LOCAL SMART CHATBOT ENGINE ── */
+    const chatbotDatabase = {
+      about: {
+        keywords: ['who', 'about', 'who is', 'biography', 'profile', 'summary', 'background', 'name', 'avinash'],
+        response: "Avinash Patil is an AI/ML Engineering student at BITM Ballari (2023–2027), currently in his 6th semester with a 7.74/10 GPA. He specializes in Deep Learning, NLP pipelines, and Quantum ML."
+      },
+      projects: {
+        keywords: ['projects', 'builds', 'codebase', 'develop', 'portfolio projects'],
+        response: "Avinash's projects include:<br/>" +
+                  "1. <strong>Aladdin-Shield</strong>: ESG NLP greenwashing detector & DCC-GARCH risk auditor.<br/>" +
+                  "2. <strong>Blood Sense AI</strong>: Hybrid MobileNetV2 + VQC quantum model for Leukemia cell detection (96%+ recall).<br/>" +
+                  "3. <strong>CodeArena RL</strong>: OpenEnv RL environment for code repair using GRPO.<br/>" +
+                  "4. <strong>WellBot</strong>: Multi-layer LLM fallback wellness assistant.<br/>" +
+                  "5. <strong>CAFA 6 Protein Predictor</strong>: CNN + GRU hybrid model.<br/>" +
+                  "6. <strong>Echo Check</strong>: Event-driven safety tracker API."
+      },
+      project_aladdin: {
+        keywords: ['aladdin', 'shield', 'esg', 'greenwashing', 'risk auditor', 'blackrock', 'finbert', 'dcc'],
+        response: "<strong>Aladdin-Shield</strong> is an ESG & Risk Auditor targeting BlackRock-grade analysis. It uses ProsusAI/finbert for NLP greenwashing detection and a DCC-GARCH model for correlation analysis to quantify asset systemic risk. Phase 1 (NLP auditor) is currently active and deployed on Hugging Face Spaces."
+      },
+      project_bloodsense: {
+        keywords: ['blood', 'sense', 'cancer', 'leukemia', 'cell detection', 'vqc', 'quantum', 'mobilenet', 'nain'],
+        response: "<strong>Blood Sense AI</strong> (NAIN 2.0 submission, Team 'Deep Learners') is a hybrid AI-Quantum model merging MobileNetV2 with a Variational Quantum Circuit (VQC) for Leukemia detection. It achieves an impressive 96%+ recall rate on ALL-IDB and BCCD datasets. Code available: <a href='https://github.com/havinashpatil/BloodSenseAI' target='_blank' style='color:var(--color-cyan)'>BloodSenseAI Repo</a>."
+      },
+      project_codearena: {
+        keywords: ['codearena', 'benchmark', 'rl', 'grpo', 'openenv', 'pytorch', 'repair', 'finalist', 'meta'],
+        response: "<strong>CodeArena RL Benchmark</strong> is an OpenEnv reinforcement learning benchmark for iterative code repair using GRPO. It features a grading system that monitors Big-O scaling and security limits. Avinash was a National Finalist in the Meta PyTorch Hackathon (Top 2.5% of 31,000+ teams)."
+      },
+      project_wellbot: {
+        keywords: ['wellbot', 'chatbot', 'wellness', 'fallback', 'groq', 'llama', 'ollama', 'emotion', 'infosys'],
+        response: "<strong>WellBot</strong> is a wellness chatbot utilizing a robust multi-layer fallback pipeline (Groq Llama &rarr; Local Ollama &rarr; OpenAI GPT) for 100% service uptime. Built during Avinash's Infosys Springboard internship where he served as Team Leader. Code: <a href='https://github.com/havinashpatil/Avinash-Patil_WellBot-Global-Wellness-Assistant-Chatbot_TeamA' target='_blank' style='color:var(--color-cyan)'>WellBot Repo</a>."
+      },
+      project_cafa: {
+        keywords: ['cafa', 'protein', 'cnn', 'gru', 'sequence', 'bi-gru', 'biology'],
+        response: "Developed for the CAFA 6 challenge, this hybrid deep learning architecture combines a 1D CNN and Bidirectional GRU (Bi-GRU) for protein sequence-to-function predictions, normalizing over 82,404 sequences."
+      },
+      project_echocheck: {
+        keywords: ['echo check', 'safety', 'sos', 'jwt', 'mongodb', 'location'],
+        response: "<strong>Echo Check</strong> is a real-time safety monitoring application with live location tracking and automated SOS alerts, powered by an event-driven Flask backend, secure JWT APIs, and MongoDB. Code: <a href='https://github.com/havinashpatil/EchoCheck' target='_blank' style='color:var(--color-cyan)'>EchoCheck Repo</a>."
+      },
+      skills: {
+        keywords: ['skills', 'skills list', 'languages', 'frameworks', 'technologies', 'stack', 'tech stack', 'python', 'pytorch'],
+        response: "Avinash's technical stack includes:<br/>" +
+                  "• <strong>Languages:</strong> Python, SQL, Java, JavaScript, R<br/>" +
+                  "• <strong>AI/ML:</strong> PyTorch, TensorFlow, Scikit-learn, Hugging Face, OpenCV, Quantum ML (VQC), NLP, LLM Orchestration<br/>" +
+                  "• <strong>APIs/Web:</strong> FastAPI, Flask, React.js, REST APIs, JWT<br/>" +
+                  "• <strong>Databases/Cloud:</strong> MongoDB, PostgreSQL, AWS, GCP, Oracle Cloud, Docker, Git<br/>" +
+                  "• <strong>Analytics:</strong> Power BI, DCC-GARCH, Pandas, NumPy"
+      },
+      experience: {
+        keywords: ['experience', 'internship', 'intern', 'jobs', 'infosys', 'gravitas', 'ezts', 'work'],
+        response: "Avinash has completed several internships:<br/>" +
+                  "1. <strong>Infosys Springboard Virtual Intern (AI/ML)</strong>, Feb-Apr 2026 — Served as Team Leader, developed WellBot.<br/>" +
+                  "2. <strong>Gravitas Masters Research Analyst</strong>, Dec 2024 — Conducted quantitative stock analysis and market risk profiles.<br/>" +
+                  "3. <strong>BITM &times; EZTS Python Intern</strong>, Sep 2024 — Developed functional code modules and backend algorithms."
+      },
+      contact: {
+        keywords: ['contact', 'email', 'phone', 'call', 'mail', 'linkedin', 'github', 'social', 'address', 'location'],
+        response: "You can reach Avinash Patil via:<br/>" +
+                  "• Email: <a href='mailto:avinashavinashgouda@gmail.com' style='color:var(--color-cyan)'>avinashavinashgouda@gmail.com</a><br/>" +
+                  "• Phone: <a href='tel:+919980818645' style='color:var(--color-cyan)'>+91 99808 18645</a><br/>" +
+                  "• LinkedIn: <a href='https://linkedin.com/in/avinash-patil-b089aa291' target='_blank' style='color:var(--color-cyan)'>LinkedIn Profile</a><br/>" +
+                  "• GitHub: <a href='https://github.com/havinashpatil' target='_blank' style='color:var(--color-cyan)'>github.com/havinashpatil</a>"
+      },
+      achievements: {
+        keywords: ['hackathon', 'achievements', 'awards', 'meta', 'national', 'finalist', 'hackwithai', 'telangana', 'trophy'],
+        response: "Key Achievements:<br/>" +
+                  "• <strong>Meta PyTorch OpenEnv Hackathon 2026</strong>: National Finalist (Top 2.5% of 31,000+ teams) with the autonomous GRPO RL code repair benchmark.<br/>" +
+                  "• <strong>HackWithAI Telangana 2026</strong>: Top 26 Finalist among 780+ competing teams.<br/>" +
+                  "• <strong>NAIN 2.0 Submission</strong>: Blood Sense AI hybrid quantum detection model."
+      },
+      certifications: {
+        keywords: ['certifications', 'badges', 'credly', 'ibm', 'aws', 'oracle', 'stanford', 'matlab', 'pml', 'qml'],
+        response: "Avinash holds several industry credentials:<br/>" +
+                  "• <strong>IBM QML 2026</strong>: Certified in Quantum Machine Learning algorithms.<br/>" +
+                  "• <strong>AWS Generative AI Practitioner</strong> &amp; AWS Cloud Quest.<br/>" +
+                  "• <strong>AWS Certified Cloud Practitioner</strong>.<br/>" +
+                  "• <strong>Oracle OCI AI Foundations Associate 2025</strong>.<br/>" +
+                  "• <strong>Stanford Deep Learning Specialization</strong>.<br/>" +
+                  "View certificates: <a href='https://drive.google.com/drive/folders/1p24LSXYyXDfwsBASLKtQv_Em0Fs2Fb1c?usp=sharing' target='_blank' style='color:var(--color-cyan)'>Google Drive Folder</a>."
+      },
+      class: {
+        keywords: ['usn', 'roll number', 'student', 'id', 'college', 'bitm', 'gpa', 'grades', 'academic'],
+        response: "Avinash Patil studies Artificial Intelligence &amp; Machine Learning Engineering at BITM Ballari, Class of 2027. His University Seat Number (USN) is <strong>3BR23AI015</strong>, and he currently holds a <strong>7.74/10 GPA</strong>."
+      },
+      hire: {
+        keywords: ['why hire', 'hire', 'recruit', 'blackrock', 'anthropic', 'value', 'career goal', 'upskilling'],
+        response: "Avinash is an exceptional candidate for AI/ML engineering roles. He pairs deep theoretical knowledge (GPA 7.74/10, Quantum ML, GRPO Reinforcement Learning) with outstanding production achievements (Top 2.5% Meta Hackathon, hybrid clinical model with 96%+ recall, and team leadership on complex LLM architectures). He is highly enthusiastic, upskilling in financial NLP, and ready to contribute to core engineering tasks."
+      }
+    };
+
+    function matchResponse(userInput) {
+      const inputLower = userInput.toLowerCase();
+      let bestMatch = null;
+      let highestScore = 0;
+
+      for (const key in chatbotDatabase) {
+        const item = chatbotDatabase[key];
+        let score = 0;
+        
+        for (const kw of item.keywords) {
+          if (inputLower.includes(kw)) {
+            // Give higher weight to multi-word phrase matches
+            score += kw.split(' ').length;
+          }
+        }
+
+        if (score > highestScore) {
+          highestScore = score;
+          bestMatch = item.response;
+        }
+      }
+
+      if (highestScore > 0) {
+        return bestMatch;
+      }
+
+      return "I'm not sure about that. Try asking about his projects (Aladdin-Shield, Blood Sense AI, WellBot), skills, hackathon achievements, certifications, or how to contact him!";
+    }
+
+    function sendUserMessage() {
+      const inputEl = document.getElementById('chat-input');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      inputEl.value = '';
+      appendMessage(text, 'user');
+
+      // Create typing bubble
+      const messagesContainer = document.getElementById('chat-messages');
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'msg bot typing-bubble-wrapper';
+      typingDiv.innerHTML = `
+        <div class="msg-icon">🤖</div>
+        <div class="typing-bubble">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // Simulated AI response delay
+      setTimeout(() => {
+        typingDiv.remove();
+        const responseText = matchResponse(text);
+        appendMessage(responseText, 'bot');
+      }, 700 + Math.random() * 600);
+    }
+
+    function appendMessage(htmlContent, sender) {
+      const messagesContainer = document.getElementById('chat-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `msg ${sender}`;
+      
+      const icon = sender === 'bot' ? '🤖' : '👤';
+      msgDiv.innerHTML = `
+        <div class="msg-icon">${icon}</div>
+        <div class="msg-bubble">${htmlContent}</div>
+      `;
+      
+      messagesContainer.appendChild(msgDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function handleChatInputKeyDown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendUserMessage();
+      }
+    }
+
+    function handleSuggestionClick(suggestionText) {
+      appendMessage(suggestionText, 'user');
+      
+      const messagesContainer = document.getElementById('chat-messages');
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'msg bot typing-bubble-wrapper';
+      typingDiv.innerHTML = `
+        <div class="msg-icon">🤖</div>
+        <div class="typing-bubble">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      setTimeout(() => {
+        typingDiv.remove();
+        const responseText = matchResponse(suggestionText);
+        appendMessage(responseText, 'bot');
+      }, 600);
+    }
+  </script>
+</body>
+</html>
